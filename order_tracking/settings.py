@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "tracking",
     #3rd party"
     "rest_framework",
+      'rest_framework.authtoken',
 #     "location_field.apps.DefaultConfig",   
 #     'mapwidgets',
 #    "leaflet", 
@@ -160,6 +161,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 django_heroku.settings(locals())
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'knox.auth.TokenAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
+ 
+    ],
+    #   'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+    #   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 10
+}
 
 # GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal303'
 import os

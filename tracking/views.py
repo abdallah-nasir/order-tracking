@@ -32,15 +32,16 @@ class OrderCreate(ListCreateAPIView):
     def perform_create(self,serializer): 
         lat_lng= serializer.initial_data["lat_lng"]  
         query=serializer.initial_data["address"]  
+        shop=serializer.initial_data["shop"] 
         if lat_lng:
             url_2=requests.get(f"http://api.positionstack.com/v1/reverse?access_key={api}&query={lat_lng}")
             # url_2=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat_lng}&key={google}") #reverse lat,lng
             results=url_2.json()
             print(results)
-        elif query:
-            url=requests.get(f"http://api.positionstack.com/v1/forward?access_key={api}&query={query}")
-            results=url.json() 
-            print(results)
+    
+        url=requests.get(f"http://api.positionstack.com/v1/forward?access_key={api}&query={query}")
+        results=url.json() 
+        print(results)
         try:   
             filters={}
             for i in results["data"]:
@@ -63,9 +64,7 @@ class OrderCreate(ListCreateAPIView):
         
         except: 
             message={"message":"sorry there is an issue finding you location"}   
-            return Response(message) 
-
-        
+            return Response(message)       
     
 
 
@@ -91,6 +90,18 @@ class OrderUpdate(RetrieveUpdateAPIView):
             serializer.save()   
             # message={"message":serializer}      
         return Response(serializer.data)
-        
+from rest_framework.decorators import api_view,permission_classes,authentication_classes  
+  
+@api_view(["GET","POST"])
+def test(request):
+    if request.method == 'POST':
+        serializer=TestSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            return Response(serializer.errors)
 
-   
+    if request.method == "GET":
+        serializer=TestSerializer(Test.objects.all(),many=True)
+    return Response(serializer.data)
+      
