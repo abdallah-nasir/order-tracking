@@ -6,7 +6,7 @@ from rest_framework.serializers import HyperlinkedIdentityField,ModelSerializer
 
 order_detail_url = HyperlinkedIdentityField(view_name='home:details',lookup_field="id")
 class PlaceSerializer(serializers.ModelSerializer):
-    url=order_detail_url
+    url=order_detail_url    
     class Meta:
         model = Order
         fields="__all__"

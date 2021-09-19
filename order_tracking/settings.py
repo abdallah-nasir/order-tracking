@@ -24,8 +24,9 @@ SECRET_KEY = 'django-insecure-aphoh#c%1o=7sz8&)p0x5qny77h7^mtb)9w7&(*0m&z3cpe_uh
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+import django_heroku
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1","ozzo-test.herokuapp.com"]
 
 
 # Application definition
@@ -56,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        "whitenoise.middleware.WhiteNoiseMiddleware",
+
 ]
 
 ROOT_URLCONF = 'order_tracking.urls'
@@ -89,16 +92,26 @@ WSGI_APPLICATION = 'order_tracking.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": "order tracking 1",
-        "USER": "postgres",
-        "PASSWORD": "123456789Boss",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
-}
+DATABASES={
+    "default":{
+        "ENGINE":"django.db.backends.postgresql_psycopg2",
+        "NAME":"ddqn1j93hcb7f2",
+        "USER":"ldtuunrhiftcei",
+        "PASSWORD":"7f4fd932e6c5a4978388e559d129a741beee4913d04f3c951d472229d087fac1",
+        "HOST":"ec2-54-147-126-173.compute-1.amazonaws.com",
+        "PORT":"5432"
+    }     
+}   
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.contrib.gis.db.backends.postgis",
+#         "NAME": "order tracking 1",
+#         "USER": "postgres",
+#         "PASSWORD": "123456789Boss",
+#         "HOST": "localhost",
+#         "PORT": "5432",
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -144,6 +157,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
+django_heroku.settings(locals())
+
 
 # GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal303'
 import os

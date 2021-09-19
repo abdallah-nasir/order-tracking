@@ -11,3 +11,4 @@ class CityAdmin(admin.ModelAdmin):
 
 admin.site.register(Order,CityAdmin)
 admin.site.register(Driver)
+admin.site.register(Shop)

@@ -15,7 +15,7 @@ from geopy.geocoders import Nominatim
 import json
 geolocator = Nominatim(user_agent="tracking")
 api="d611419749b667a306600e1772193619"
-
+google="AIzaSyCzhBefcZf1envB4TrkOs-xsXR7ldFS3XI"
 class Orders(ListAPIView):
     queryset=Order.objects.all()             
     serializer_class=PlaceSerializer 
@@ -34,7 +34,9 @@ class OrderCreate(ListCreateAPIView):
         query=serializer.initial_data["address"]  
         if lat_lng:
             url_2=requests.get(f"http://api.positionstack.com/v1/reverse?access_key={api}&query={lat_lng}")
+            # url_2=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat_lng}&key={google}") #reverse lat,lng
             results=url_2.json()
+            print(results)
         elif query:
             url=requests.get(f"http://api.positionstack.com/v1/forward?access_key={api}&query={query}")
             results=url.json() 
@@ -63,6 +65,9 @@ class OrderCreate(ListCreateAPIView):
             message={"message":"sorry there is an issue finding you location"}   
             return Response(message) 
 
+        
+    
+
 
 class OrderConfirm(ListCreateAPIView):
     serializer_class=OrderSerializer
@@ -76,7 +81,7 @@ class OrderConfirm(ListCreateAPIView):
             order.save()
            
         return Response(serializer.data)
-    
+
 class OrderUpdate(RetrieveUpdateAPIView):
     serializer_class=OrderUpdateSerializer
     queryset=Driver.objects.filter(order__ordered=True)
