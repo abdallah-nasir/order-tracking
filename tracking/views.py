@@ -7,13 +7,13 @@ from .serializers import *
 from rest_framework.generics import ListCreateAPIView,ListAPIView, RetrieveAPIView,RetrieveUpdateAPIView
 from django.http import JsonResponse
 from rest_framework.response import Response
-from django.contrib.gis.geos import Point
+# from django.contrib.gis.geos import Point
 
 # Create your views here.
 
-from geopy.geocoders import Nominatim
+# from geopy.geocoders import Nominatim
 import json
-geolocator = Nominatim(user_agent="tracking")
+# geolocator = Nominatim(user_agent="tracking")
 api="d611419749b667a306600e1772193619"
 google="AIzaSyCzhBefcZf1envB4TrkOs-xsXR7ldFS3XI"
 class Orders(ListAPIView):

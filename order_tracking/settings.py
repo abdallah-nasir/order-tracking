@@ -38,14 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.gis',
+    # 'django.contrib.gis',
     #myapps
     "tracking",
     #3rd party"
     "rest_framework",
-    "location_field.apps.DefaultConfig",   
-    'mapwidgets',
-   "leaflet", 
+#     "location_field.apps.DefaultConfig",   
+#     'mapwidgets',
+#    "leaflet", 
 #    "mapbox_location_field",
 ]
 

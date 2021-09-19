@@ -1,6 +1,8 @@
-from django.contrib.gis import forms
+# from django.contrib.gis import forms
+from django import forms
+
 from .models import *
-from mapwidgets.widgets import GooglePointFieldWidget, GoogleStaticOverlayMapWidget
+# from mapwidgets.widgets import GooglePointFieldWidget, GoogleStaticOverlayMapWidget
 
 class PlaceForm(forms.ModelForm):
     class Meta:
