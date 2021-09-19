@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Shop(models.Model):
     name=models.CharField(max_length=100)
     address=models.CharField(max_length=100)
-    lat_lng=PlainLocationField()
+    lat_lng=models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
@@ -16,7 +16,7 @@ class Shop(models.Model):
 class Order(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     address = models.CharField(max_length=255) #optinal
-    lat_lng = PlainLocationField(blank=True,null=True,zoom=7)
+    lat_lng = models.CharField(max_length=100,blank=True,null=True)
     ordered=models.BooleanField(default=False)
     
     # shop=
@@ -27,6 +27,6 @@ class Order(models.Model):
 class Driver(models.Model):
     user=models.ForeignKey(User,default=1,on_delete=models.CASCADE)
     order=models.ForeignKey(Order,on_delete=models.CASCADE)
-    my_location=PlainLocationField(zoom=7) #(lat,lng) only
+    my_location=models.CharField(max_length=100) #(lat,lng) only
     def __str__(self):
         return str(self.order.id)
