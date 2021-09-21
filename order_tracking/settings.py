@@ -145,10 +145,11 @@ USE_L10N = True
 
 USE_TZ = True
 #Rest Auth
-REST_FRAMEWORK = {
+REST_FRAMEWORK = {    
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        # 'knox.auth.TokenAuthentication'
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+        # 'knox.auth.TokenAuthentication'    
         'rest_framework.authentication.TokenAuthentication',
  
     ],
@@ -159,47 +160,16 @@ REST_FRAMEWORK = {
     # 'PAGE_SIZE': 10
 }
 #JWT
-from datetime import timedelta
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
-    'UPDATE_LAST_LOGIN': True,
 
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUDIENCE': None,
-    'ISSUER': None,
-    'JWK_URL': None,
-    'LEEWAY': 0,
-
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
-
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
-
-    'JTI_CLAIM': 'jti',
-
-    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-}
 #REST AUTH
 SITE_ID = 1
-JWT_AUTH_COOKIE = 'account-auth-token'
-JWT_AUTH_REFRESH_COOKIE = 'account-refresh-token'
-REST_USE_JWT = True
-OLD_PASSWORD_FIELD_ENABLED = True
-LOGOUT_ON_PASSWORD_CHANGE = True
-JWT_AUTH_COOKIE_USE_CSRF =True
-JWT_AUTH_COOKIE_ENFORCE_CSRF_ON_UNAUTHENTICATED =True
+
+# REST_USE_JWT = True
+# OLD_PASSWORD_FIELD_ENABLED = True
+# LOGOUT_ON_PASSWORD_CHANGE = True
+# JWT_AUTH_COOKIE_USE_CSRF =True
+# JWT_AUTH_COOKIE_ENFORCE_CSRF_ON_UNAUTHENTICATED =True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 REST_AUTH_SERIALIZERS = {
@@ -207,9 +177,13 @@ REST_AUTH_SERIALIZERS = {
  
 }
 REST_AUTH_REGISTER_SERIALIZERS={
-'REGISTER_SERIALIZER': 'Accounts.serializers.CustomRegisterSerialize',
+'REGISTER_SERIALIZER': 'Accounts.serializers.CustomRegisterSerializer',
 
 }
+# FILE_UPLOAD_HANDLERS=[
+#     'django.contrib.staticfiles.finders.MemoryFileUploadHandler',
+#     'django.contrib.staticfiles.finders.TemporaryFileUploadHandler',
+# ]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
     

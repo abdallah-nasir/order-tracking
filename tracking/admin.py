@@ -10,6 +10,5 @@ from .models import *
 #     }
 
 admin.site.register(Order)
-admin.site.register(Driver)
 admin.site.register(Shop)
 admin.site.register(Test)

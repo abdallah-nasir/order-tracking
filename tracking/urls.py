@@ -7,11 +7,13 @@ urlpatterns = [
 path("",Orders.as_view(),name="home"),
 path("create/",OrderCreate.as_view(),name="create"),
 path("details/<str:id>/",OrderDetails.as_view(),name="details"),
-path("order/confirm/",OrderConfirm.as_view(),name="confirm"),
-path("order/update/<str:id>/",OrderUpdate.as_view(),name="update"),
+path("order/confirm/<str:id>/",views.order_confirm,name="confirm"),
+path("order/update/<str:id>/",views.order_location_update,name="update"),
+path("order/delivered/<str:id>/",views.order_deliver,name="close"),
+  
+
 path("test/",views.test,name="test"),
 
 ]
-                  
                   
                   
