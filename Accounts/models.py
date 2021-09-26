@@ -11,7 +11,7 @@ def upload_image(instance,filename,**kwargs):
 CHOICES=(
     ("Driver","Driver"),
     ("Customer","Customer"),
-    ("Consumer","Consumer")
+    ("Supplier","Supplier")
 )
 
 @receiver(post_save,sender=User)
@@ -24,9 +24,10 @@ def create_account(sender,instance,created,**kwargs):
             Token.objects.create(user=instance)
 class Account(models.Model):
     name=models.OneToOneField(User,on_delete=models.CASCADE)
+    trade_name=models.CharField(max_length=50,blank=True,null=True)
     image=models.ImageField(upload_to=upload_image)
     type=models.CharField(choices=CHOICES,max_length=20)
-
+    phone=models.CharField(max_length=15,blank=True)
     def __str__(self):
         return self.name.username
     

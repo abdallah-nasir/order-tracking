@@ -13,7 +13,7 @@ from rest_framework.generics import ListCreateAPIView,ListAPIView, RetrieveAPIVi
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework import status
-
+from django.db.models import Q
 # from django.contrib.gis.geos import Point
 
 # Create your views here.
@@ -71,6 +71,7 @@ class OrderCreate(ListCreateAPIView):
         else:
             message={serializer.errors}
         return Response(message)    
+
 
 @api_view(["PUT"])
 @permission_classes((IsAuthenticated,))        
@@ -137,11 +138,15 @@ def test(request):
     if request.method == 'POST':
         serializer=TestSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            # serializer.save()
+            return Response(serializer.data)
         else:
             return Response(serializer.errors)
-
     if request.method == "GET":
-        serializer=TestSerializer(Test.objects.all(),many=True)
-    return Response(serializer.data)
-      
+        search=request.GET.get("qs")
+        query=Test.objects.filter(Q(lat_lng__icontains=search)) 
+        print(query)
+        serializer=TestSerializer(query,many=True)
+        data={"count":query.count(),"data":serializer.data}
+        return Response(data)
+    

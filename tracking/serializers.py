@@ -1,8 +1,9 @@
 from rest_framework import serializers     
 from .models import *
 from rest_framework.serializers import(     
-HyperlinkedIdentityField,ModelSerializer,SerializerMethodField)
+HyperlinkedIdentityField,ModelSerializer,SerializerMethodField,ValidationError)
 
+import os
 
 
 order_detail_url = HyperlinkedIdentityField(view_name='home:details',lookup_field="id")
@@ -77,5 +78,15 @@ class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields="__all__"
+  
 
+    def validate_image(self,value):
+        image_size = value.size / (1024*1024)  #megabytes
+        image_type=os.path.splitext(value.name)[1]
+        print(value.path)
+        if image_size > 2.0 or image_type == ".jpg":
+            raise ValidationError("image type or size is unvalid")
+        return value
+    
+    
 

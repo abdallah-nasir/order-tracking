@@ -3,12 +3,30 @@ login
     key: username or email
     key: password
 
-register
-    url(https://ozzo-test.herokuapp.com/auth/registration/)
+supplier register
+    url(https://ozzo-test.herokuapp.com/api/accounts/supplier/)
     key: username
     key: email
-    key: last_name
+    key: trade_name
     key: password1
     key: password2
-    key: type >> value:[Customer,Driver,Consumer]  #Choice Field
     key: image
+
+customer register
+    url(https://ozzo-test.herokuapp.com/api/accounts/customer/)
+    key: username
+    key: email
+    key: password1
+    key: password2
+    key: image
+
+driver register
+    url(https://ozzo-test.herokuapp.com/api/accounts/driver/)
+    key: username
+    key: email
+    key: password1
+    key: password2
+    key: image
+
+
+

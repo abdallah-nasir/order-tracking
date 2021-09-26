@@ -25,7 +25,7 @@ urlpatterns = [
     path('auth/registration/', include('dj_rest_auth.registration.urls')),
     path('auth/account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
     path('', include("tracking.urls",namespace="home")),
-    # path('api/accounts/', include("Accounts.urls",namespace="accounts_api")),
+    path('api/accounts/', include("Accounts.urls",namespace="accounts_api")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

@@ -4,9 +4,11 @@ from .views import *
 app_name="Accounts"
 
 urlpatterns = [ 
-path("",CustomSignUPView.as_view(),name="home"),
+path("supplier/",SupplierSignUPView.as_view(),name="home"),
+path("driver/",DriverSignUPView.as_view(),name="driver"),
+path("customer/",CustommerSignUPView.as_view(),name="customer"),
 
 ]
-                  
+              
                   
                   

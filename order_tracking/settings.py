@@ -112,6 +112,16 @@ DATABASES={
         "PORT":"5432"
     }     
 }   
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.contrib.gis.db.backends.postgis",
+#         "NAME": "order tracking",
+#         "USER": "postgres",
+#         "PASSWORD": "123456789Boss",
+#         "HOST": "localhost",
+#         "PORT": "5432",
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -171,15 +181,15 @@ SITE_ID = 1
 # JWT_AUTH_COOKIE_USE_CSRF =True
 # JWT_AUTH_COOKIE_ENFORCE_CSRF_ON_UNAUTHENTICATED =True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-
-REST_AUTH_SERIALIZERS = {
-    'LOGIN_SERIALIZER': 'Accounts.serializers.CustomLoginSerializer',
+    
+# REST_AUTH_SERIALIZERS = {
+#     'LOGIN_SERIALIZER': 'Accounts.serializers.CustomLoginSerializer',
  
-}
-REST_AUTH_REGISTER_SERIALIZERS={
-'REGISTER_SERIALIZER': 'Accounts.serializers.CustomRegisterSerializer',
+# }
+# REST_AUTH_REGISTER_SERIALIZERS={
+# 'REGISTER_SERIALIZER': 'Accounts.serializers.CustomRegisterSerializer',
 
-}
+# }
 # FILE_UPLOAD_HANDLERS=[
 #     'django.contrib.staticfiles.finders.MemoryFileUploadHandler',
 #     'django.contrib.staticfiles.finders.TemporaryFileUploadHandler',
